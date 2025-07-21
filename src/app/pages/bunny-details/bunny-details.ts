@@ -26,6 +26,7 @@ export class BunnyDetails {
   bunnies: Bunny[] = [];
   happiness: number = 0;
   newAvatarFile: File | null = null;
+  pointsConfig: { lettuce: number, carrot: number, play: number, playBonus: number } = { lettuce: 1, carrot: 3, play: 2, playBonus: 4 };
 
   private bunnyId: string = '';
 
@@ -53,9 +54,25 @@ export class BunnyDetails {
     this.loadingEvents = true;
     this.events = await this.bunnyService.getEventsForBunny(this.bunnyId);
     this.events.sort((a, b) => b.timestamp - a.timestamp);
+    this.pointsConfig = await this.bunnyService.getPointsConfig();
     this.happiness = await this.bunnyService.getBunnyHappiness(this.bunnyId);
     this.loadingEvents = false;
     this.cdr.detectChanges();
+  }
+
+  getEventPoints(event: BunnyEvent): number {
+    if (event.type === 'eating') {
+      if (event.details.foodType === 'lettuce') return this.pointsConfig.lettuce;
+      if (event.details.foodType === 'carrot') return this.pointsConfig.carrot;
+    } else if (event.type === 'playing') {
+      const previousPlays = this.events.filter(e =>
+        e.type === 'playing' &&
+        e.details.playmateId === event.details.playmateId &&
+        e.timestamp < event.timestamp
+      );
+      return previousPlays.length > 0 ? this.pointsConfig.playBonus : this.pointsConfig.play;
+    }
+    return 0;
   }
 
   async eat(foodType: 'lettuce' | 'carrot') {

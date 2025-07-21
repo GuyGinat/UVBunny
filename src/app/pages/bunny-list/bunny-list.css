@@ -1,3 +1,14 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(0deg, #fff0f6 0%, #ffffff 100%);
+}
+
+.container {
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(255, 192, 203, 0.12);
+  padding-bottom: 32px;
+}
+
 .bunny-card {
   cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -7,7 +18,7 @@
 }
 .bunny-card:hover, .bunny-card:focus {
   transform: scale(1.05);
-  border-color: #a3b1ab;
+  border-color: #fd6ba5;
   box-shadow: 0 4px 16px rgba(25,135,84,0.15);
   outline: none;
 }
@@ -18,4 +29,8 @@
   background: #eee url('https://placehold.co/80x80?text=Bunny') center/cover no-repeat;
   border: 3px solid #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.badge {
+  background-color: #fd6ba5;
 }

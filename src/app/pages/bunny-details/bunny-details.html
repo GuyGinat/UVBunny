@@ -30,10 +30,10 @@
       <ul class="list-group text-start" *ngIf="!loadingEvents && events.length">
         <li class="list-group-item" *ngFor="let event of events">
           <span *ngIf="event.type === 'eating'">
-            {{ event.timestamp | date:'short' }}: Ate <span *ngIf="event.details.foodType === 'lettuce'">Lettuce 🥬</span><span *ngIf="event.details.foodType === 'carrot'">Carrot 🥕</span> (+{{ event.happinessDelta }})
+            {{ event.timestamp | date:'short' }}: Ate <span *ngIf="event.details.foodType === 'lettuce'">Lettuce 🥬</span><span *ngIf="event.details.foodType === 'carrot'">Carrot 🥕</span> (+{{ getEventPoints(event) }})
           </span>
           <span *ngIf="event.type === 'playing'">
-            {{ event.timestamp | date:'short' }}: Played with <b>{{ getPlaymateName(event.details.playmateId ?? '') }}</b> (+{{ event.happinessDelta }})
+            {{ event.timestamp | date:'short' }}: Played with <b>{{ getPlaymateName(event.details.playmateId ?? '') }}</b> (+{{ getEventPoints(event) }})
           </span>
         </li>
       </ul>
