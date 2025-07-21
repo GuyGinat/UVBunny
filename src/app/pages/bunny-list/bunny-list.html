@@ -1,5 +1,6 @@
 <div class="container mt-4">
-  <h2>Bunny Family</h2>
+  <h2 class="text-center">UV Bunnies</h2>
+  <h4 class="text-center mb-4">Best bunnies in the land</h4>
 
   <form (ngSubmit)="addBunny()" #bunnyForm="ngForm" class="mb-4">
     <div class="input-group mb-2 align-items-center">
@@ -8,7 +9,7 @@
         {{ newBunnyAvatarFileName }}
       </button>
       <input #avatarInput type="file" class="d-none" id="bunnyAvatarInput" (change)="onAvatarSelected($event)" accept="image/*" />
-      <button class="btn btn-primary" type="submit" [disabled]="!bunnyForm.form.valid">Add Bunny</button>
+      <button class="btn btn-primary" type="submit" [disabled]="!bunnyForm.form.valid">Adopt this Bunny!</button>
     </div>
   </form>
 
@@ -18,6 +19,10 @@
   </div>
 
   <div *ngIf="!loadingHappiness">
+    <div class="mb-4 text-center">
+      <span class="fs-4">Average Happiness: </span>
+      <span class="badge bg-info fs-4">{{ averageHappiness }}</span>
+    </div>
     <div class="row g-4">
       <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let bunny of bunnies$ | async">
         <div class="card bunny-card h-100 text-center" (click)="goToBunny(bunny)" tabindex="0">

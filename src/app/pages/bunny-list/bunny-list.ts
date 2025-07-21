@@ -22,6 +22,7 @@ export class BunnyList {
   newBunnyAvatarFileName: string = 'Choose Bunny avatar';
   happinessMap: { [bunnyId: string]: number } = {};
   loadingHappiness = true;
+  averageHappiness: number = 0;
 
   constructor(private bunnyService: BunnyService, private router: Router, private cdr: ChangeDetectorRef) {
     this.bunnies$ = this.bunnyService.getBunnies();
@@ -35,6 +36,9 @@ export class BunnyList {
           }
         })
       );
+      // Calculate average happiness
+      const happinessValues = Object.values(this.happinessMap);
+      this.averageHappiness = happinessValues.length ? Math.round(happinessValues.reduce((a, b) => a + b, 0) / happinessValues.length) : 0;
       this.loadingHappiness = false;
       this.cdr.detectChanges();
     });
