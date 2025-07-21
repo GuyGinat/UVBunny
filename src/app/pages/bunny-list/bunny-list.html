@@ -7,7 +7,9 @@
     <div>
       <span class="fs-4">Average Happiness: </span>
       <span class="badge bg-info fs-4">{{ averageHappiness }}</span>
-      <button class="btn btn-outline-info ms-3" (click)="goToConfig()">⚙️ Config</button>
+      <button class="border-0 ms-3 d-inline-flex align-items-center config-badge-btn" (click)="goToConfig()">
+        <span class="me-1">⚙️</span> Real bunnies choose their own happiness points
+      </button>
     </div>
   </div>
 

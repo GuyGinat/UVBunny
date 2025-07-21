@@ -13,24 +13,45 @@
   cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 1px 4px rgba(0,0,0,0.04);  
-  border: 2px solid;
+  border: 1px solid;
   border-color: #a0a0a0;
 }
 .bunny-card:hover, .bunny-card:focus {
   transform: scale(1.05);
+  border-width: 2px;
   border-color: #fd6ba5;
   box-shadow: 0 4px 16px rgba(25,135,84,0.15);
   outline: none;
 }
 .bunny-avatar {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   background: #eee url('https://placehold.co/80x80?text=Bunny') center/cover no-repeat;
-  border: 3px solid #fff;
+  background-position: center center;
+  background-size: cover;
+  border: 2px solid #cccccc;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .badge {
   background-color: #fd6ba5;
+}
+
+.config-badge-btn {
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  background-color: #ff8ab9;
+  color: #fff;
+  border: 1px solid #ff8ab9;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.config-badge-btn:hover, .config-badge-btn:focus {
+  background: #fff;
+  color: #ff8ab9;
+  border: 1px solid #ff8ab9;
 }
