@@ -19,6 +19,7 @@ export class BunnyList {
   bunnies$: Observable<Bunny[]>;
   newBunnyName = '';
   newBunnyAvatarFile: File | null = null;
+  newBunnyAvatarFileName: string = 'Choose Bunny avatar';
   happinessMap: { [bunnyId: string]: number } = {};
   loadingHappiness = true;
 
@@ -43,8 +44,10 @@ export class BunnyList {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.newBunnyAvatarFile = input.files[0];
+      this.newBunnyAvatarFileName = this.newBunnyAvatarFile.name;
     } else {
       this.newBunnyAvatarFile = null;
+      this.newBunnyAvatarFileName = 'Choose Bunny avatar';
     }
   }
 
@@ -60,6 +63,7 @@ export class BunnyList {
     await this.bunnyService.addBunny({ name: this.newBunnyName.trim(), avatarUrl });
     this.newBunnyName = '';
     this.newBunnyAvatarFile = null;
+    this.newBunnyAvatarFileName = 'Choose Bunny avatar';
     const avatarInput = document.getElementById('bunnyAvatarInput') as HTMLInputElement;
     if (avatarInput) avatarInput.value = '';
   }

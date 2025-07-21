@@ -6,6 +6,9 @@ import { Bunny, BunnyEvent } from '../../models/bunny.model';
 import { BunnyService } from '../../services/bunny.service';
 import { Observable, map, switchMap, of } from 'rxjs';
 import { ChangeDetectorRef } from '@angular/core';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { doc, updateDoc } from 'firebase/firestore';
+import { Firestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-bunny-details',
@@ -22,6 +25,7 @@ export class BunnyDetails {
   playmateId: string = '';
   bunnies: Bunny[] = [];
   happiness: number = 0;
+  newAvatarFile: File | null = null;
 
   private bunnyId: string = '';
 
@@ -29,7 +33,8 @@ export class BunnyDetails {
     private route: ActivatedRoute,
     private bunnyService: BunnyService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private firestore: Firestore
   ) {
     this.bunnies$ = this.bunnyService.getBunnies();
     this.bunny$ = this.route.paramMap.pipe(
@@ -87,6 +92,29 @@ export class BunnyDetails {
     });
     this.playmateId = '';
     await this.fetchEvents();
+  }
+
+  onAvatarSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.newAvatarFile = input.files[0];
+      this.uploadAvatar();
+    } else {
+      this.newAvatarFile = null;
+    }
+  }
+
+  async uploadAvatar() {
+    if (!this.newAvatarFile || !this.bunnyId) return;
+    const storage = getStorage();
+    const avatarRef = ref(storage, `bunny-avatars/${this.bunnyId}-${Date.now()}-${this.newAvatarFile.name}`);
+    await uploadBytes(avatarRef, this.newAvatarFile);
+    const avatarUrl = await getDownloadURL(avatarRef);
+    // Update the bunny document
+    const bunnyDoc = doc(this.firestore, 'bunnies', this.bunnyId);
+    await updateDoc(bunnyDoc, { avatarUrl });
+    this.newAvatarFile = null;
+    this.fetchEvents(); // refresh bunny data
   }
 
   goBack() {

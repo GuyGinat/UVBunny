@@ -5,6 +5,8 @@
   <div class="card mx-auto" style="max-width: 400px;">
     <div class="card-body text-center">
       <div class="bunny-avatar mb-3 mx-auto" [ngStyle]="bunny.avatarUrl ? {'background-image': 'url(' + bunny.avatarUrl + ')'} : {}"></div>
+      <button type="button" class="btn btn-outline-secondary btn-sm mb-3" (click)="avatarInput.click()">Change Avatar</button>
+      <input #avatarInput type="file" class="d-none" (change)="onAvatarSelected($event)" accept="image/*" />
       <h3 class="card-title">{{ bunny.name }}</h3>
       <span class="badge bg-success fs-5 mb-3">Happiness: {{ happiness }}</span>
       <hr>

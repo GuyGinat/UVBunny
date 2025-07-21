@@ -5,7 +5,7 @@
     <div class="input-group mb-2 align-items-center">
       <input type="text" class="form-control" placeholder="Bunny name" [(ngModel)]="newBunnyName" name="bunnyName" required>
       <button type="button" class="btn btn-outline-secondary" (click)="avatarInput.click()" style="min-width: 160px;">
-        Choose Bunny avatar
+        {{ newBunnyAvatarFileName }}
       </button>
       <input #avatarInput type="file" class="d-none" id="bunnyAvatarInput" (change)="onAvatarSelected($event)" accept="image/*" />
       <button class="btn btn-primary" type="submit" [disabled]="!bunnyForm.form.valid">Add Bunny</button>
