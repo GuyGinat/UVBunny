@@ -13,4 +13,6 @@ export interface BunnyEvent {
     foodType?: 'lettuce' | 'carrot';
     playmateId?: string;
   };
+  happinessDelta: number;
+  bunnyId: string;
 } 

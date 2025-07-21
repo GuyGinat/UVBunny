@@ -1,1 +1,41 @@
-<p>bunny-details works!</p>
+<div class="container mt-4" *ngIf="bunny$ | async as bunny">
+  <button class="btn btn-outline-secondary mb-3" (click)="goBack()">
+    &larr; Back
+  </button>
+  <div class="card mx-auto" style="max-width: 400px;">
+    <div class="card-body text-center">
+      <div class="bunny-avatar mb-3 mx-auto" [ngStyle]="bunny.avatarUrl ? {'background-image': 'url(' + bunny.avatarUrl + ')'} : {}"></div>
+      <h3 class="card-title">{{ bunny.name }}</h3>
+      <span class="badge bg-success fs-5 mb-3">Happiness: {{ happiness }}</span>
+      <hr>
+      <div class="mb-3">
+        <button class="btn btn-outline-success me-2" (click)="eat('lettuce')">Eat Lettuce 🥬</button>
+        <button class="btn btn-outline-warning" (click)="eat('carrot')">Eat Carrot 🥕</button>
+      </div>
+      <form (ngSubmit)="play()" class="mb-3 d-flex align-items-center justify-content-center">
+        <select class="form-select w-auto me-2" [(ngModel)]="playmateId" name="playmateId" required>
+          <option value="" disabled selected>Select playmate</option>
+          <option *ngFor="let mate of (bunnies$ | async)" [value]="mate.id" [disabled]="mate.id === bunny.id">{{ mate.name }}</option>
+        </select>
+        <button class="btn btn-primary" type="submit" [disabled]="!playmateId">Play 🤾‍♂️</button>
+      </form>
+      <hr>
+      <h5>Event History</h5>
+      <div *ngIf="loadingEvents" class="text-center my-3">
+        <img src="assets/gifs/jump.gif" alt="Loading..." style="width: 120px; height: 120px;" />
+        <div class="text-muted mt-2">Loading events...</div>
+      </div>
+      <ul class="list-group text-start" *ngIf="!loadingEvents && events.length">
+        <li class="list-group-item" *ngFor="let event of events">
+          <span *ngIf="event.type === 'eating'">
+            {{ event.timestamp | date:'short' }}: Ate <span *ngIf="event.details.foodType === 'lettuce'">Lettuce 🥬</span><span *ngIf="event.details.foodType === 'carrot'">Carrot 🥕</span> (+{{ event.happinessDelta }})
+          </span>
+          <span *ngIf="event.type === 'playing'">
+            {{ event.timestamp | date:'short' }}: Played with <b>{{ getPlaymateName(event.details.playmateId ?? '') }}</b> (+{{ event.happinessDelta }})
+          </span>
+        </li>
+      </ul>
+      <div *ngIf="!loadingEvents && !events.length" class="text-muted">No events yet.</div>
+    </div>
+  </div>
+</div>

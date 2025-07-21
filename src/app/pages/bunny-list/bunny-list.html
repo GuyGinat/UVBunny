@@ -2,19 +2,30 @@
   <h2>Bunny Family</h2>
 
   <form (ngSubmit)="addBunny()" #bunnyForm="ngForm" class="mb-4">
-    <div class="input-group">
+    <div class="input-group mb-2 align-items-center">
       <input type="text" class="form-control" placeholder="Bunny name" [(ngModel)]="newBunnyName" name="bunnyName" required>
+      <button type="button" class="btn btn-outline-secondary" (click)="avatarInput.click()" style="min-width: 160px;">
+        Choose Bunny avatar
+      </button>
+      <input #avatarInput type="file" class="d-none" id="bunnyAvatarInput" (change)="onAvatarSelected($event)" accept="image/*" />
       <button class="btn btn-primary" type="submit" [disabled]="!bunnyForm.form.valid">Add Bunny</button>
     </div>
   </form>
 
-  <div class="row g-4">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let bunny of bunnies$ | async">
-      <div class="card bunny-card h-100 text-center" (click)="goToBunny(bunny)" tabindex="0">
-        <div class="card-body d-flex flex-column align-items-center justify-content-center">
-          <div class="bunny-avatar mb-3"></div>
-          <h5 class="card-title">{{ bunny.name }}</h5>
-          <span class="badge bg-success fs-5">{{ bunny.happiness || 0 }}</span>
+  <div *ngIf="loadingHappiness" class="text-center my-5">
+    <img src="assets/gifs/jump.gif" alt="Loading..." style="width: 120px; height: 120px;" />
+    <div class="text-muted mt-2">Loading bunnies...</div>
+  </div>
+
+  <div *ngIf="!loadingHappiness">
+    <div class="row g-4">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let bunny of bunnies$ | async">
+        <div class="card bunny-card h-100 text-center" (click)="goToBunny(bunny)" tabindex="0">
+          <div class="card-body d-flex flex-column align-items-center justify-content-center">
+            <div class="bunny-avatar mb-3" [ngStyle]="bunny.avatarUrl ? {'background-image': 'url(' + bunny.avatarUrl + ')'} : {}"></div>
+            <h5 class="card-title">{{ bunny.name }}</h5>
+            <span class="badge bg-success fs-5">{{ bunny.id ? (happinessMap[bunny.id] ?? 0) : 0 }}</span>
+          </div>
         </div>
       </div>
     </div>
