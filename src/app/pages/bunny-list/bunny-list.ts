@@ -77,4 +77,8 @@ export class BunnyList {
       this.router.navigate(['/bunny', bunny.id]);
     }
   }
+
+  goToConfig() {
+    this.router.navigate(['/config']);
+  }
 }
