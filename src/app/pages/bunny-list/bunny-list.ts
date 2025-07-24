@@ -19,11 +19,16 @@ export class BunnyList {
   bunnies$: Observable<Bunny[]>;
   newBunnyName = '';
   newBunnyAvatarFile: File | null = null;
-  newBunnyAvatarFileName: string = 'Choose Bunny avatar';
+  newBunnyAvatarFileName: string = 'Upload Bunny Avatar';
+  // Map of bunnyId to happiness value
   happinessMap: { [bunnyId: string]: number } = {};
   loadingHappiness = true;
   averageHappiness: number = 0;
 
+  /**
+   * On component creation, subscribe to bunnies and calculate happiness for each.
+   * Also computes the average happiness for display.
+   */
   constructor(private bunnyService: BunnyService, private router: Router, private cdr: ChangeDetectorRef) {
     this.bunnies$ = this.bunnyService.getBunnies();
     this.bunnies$.subscribe(async bunnies => {
@@ -44,6 +49,10 @@ export class BunnyList {
     });
   }
 
+  /**
+   * Handler for avatar file input change.
+   * Updates the selected file and its display name.
+   */
   onAvatarSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -55,6 +64,10 @@ export class BunnyList {
     }
   }
 
+  /**
+   * Adds a new bunny to the list, uploading the avatar if provided.
+   * Resets the form after submission.
+   */
   async addBunny() {
     if (!this.newBunnyName.trim()) return;
     let avatarUrl = '';
@@ -72,12 +85,18 @@ export class BunnyList {
     if (avatarInput) avatarInput.value = '';
   }
 
+  /**
+   * Navigates to the details page for the selected bunny.
+   */
   goToBunny(bunny: Bunny) {
     if (bunny.id) {
       this.router.navigate(['/bunny', bunny.id]);
     }
   }
 
+  /**
+   * Navigates to the configuration page for happiness points.
+   */
   goToConfig() {
     this.router.navigate(['/config']);
   }

@@ -28,8 +28,13 @@ export class BunnyDetails {
   newAvatarFile: File | null = null;
   pointsConfig: { lettuce: number, carrot: number, play: number, playBonus: number } = { lettuce: 1, carrot: 3, play: 2, playBonus: 4 };
 
+  // The current bunny's ID (from route)
   private bunnyId: string = '';
 
+  /**
+   * On component creation, subscribe to route and bunnies.
+   * Loads the current bunny and its events, and keeps a list of all bunnies for playmate selection.
+   */
   constructor(
     private route: ActivatedRoute,
     private bunnyService: BunnyService,
@@ -49,6 +54,10 @@ export class BunnyDetails {
     this.bunnies$.subscribe(bunnies => this.bunnies = bunnies);
   }
 
+  /**
+   * Fetches all events for this bunny, sorts them, updates points config and happiness.
+   * Called on load and after actions.
+   */
   async fetchEvents() {
     if (!this.bunnyId) return;
     this.loadingEvents = true;
@@ -60,6 +69,10 @@ export class BunnyDetails {
     this.cdr.detectChanges();
   }
 
+  /**
+   * Returns the points value for a given event, based on the current config.
+   * Used for displaying event history.
+   */
   getEventPoints(event: BunnyEvent): number {
     if (event.type === 'eating') {
       if (event.details.foodType === 'lettuce') return this.pointsConfig.lettuce;
@@ -75,6 +88,9 @@ export class BunnyDetails {
     return 0;
   }
 
+  /**
+   * Adds an 'eating' event for this bunny (lettuce or carrot), then refreshes events.
+   */
   async eat(foodType: 'lettuce' | 'carrot') {
     const happinessDelta = foodType === 'lettuce' ? 1 : 3;
     await this.bunnyService.addEvent({
@@ -87,6 +103,10 @@ export class BunnyDetails {
     await this.fetchEvents();
   }
 
+  /**
+   * Adds a 'playing' event for this bunny and the selected playmate, then refreshes events.
+   * Checks if they have played before to determine bonus points.
+   */
   async play() {
     if (!this.playmateId) return;
     const alreadyPlayed = await this.bunnyService.havePlayedTogether(this.bunnyId, this.playmateId);
@@ -111,6 +131,9 @@ export class BunnyDetails {
     await this.fetchEvents();
   }
 
+  /**
+   * Handler for avatar file input change. Triggers upload if a file is selected.
+   */
   onAvatarSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -121,6 +144,10 @@ export class BunnyDetails {
     }
   }
 
+  /**
+   * Uploads a new avatar image to storage and updates the bunny's avatarUrl in Firestore.
+   * Refreshes events after upload.
+   */
   async uploadAvatar() {
     if (!this.newAvatarFile || !this.bunnyId) return;
     const storage = getStorage();

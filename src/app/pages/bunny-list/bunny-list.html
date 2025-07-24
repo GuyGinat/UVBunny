@@ -1,14 +1,14 @@
 <div class="container mt-4">
   <div class="text-center mb-2">
-    <h2>UV Bunnies</h2>
-    <h4 class="mb-4 text-secondary fst-italic">Best bunnies in the land</h4>
+    <img src="assets/images/title.png" alt="UV Bunnies" class="bunny-title-img" />
+    <h6 class="mb-4 bunny-subtitle">Best bunnies in the land</h6>
   </div>
   <div *ngIf="!loadingHappiness" class="mb-4 text-center d-flex flex-column align-items-center">
     <div>
       <span class="fs-4">Average Happiness: </span>
-      <span class="badge bg-info fs-4">{{ averageHappiness }}</span>
+      <span class="badge fs-4">{{ averageHappiness }}</span>
       <button class="border-0 ms-3 d-inline-flex align-items-center config-badge-btn" (click)="goToConfig()">
-        <span class="me-1">⚙️</span> Real bunnies choose their own happiness points
+        <span class="me-1">⚙️</span> Design Happiness
       </button>
     </div>
   </div>
@@ -39,6 +39,15 @@
             <span class="badge fs-5">{{ bunny.id ? (happinessMap[bunny.id] ?? 0) : 0 }}</span>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bunny-disclaimer-container">
+    <div class="bunny-disclaimer-btn" tabindex="0">
+      ?
+      <div class="bunny-disclaimer-popup">
+        No bunnies were harmed in the making of this website, any bunny that joins is well fed and happy regardless of their happiness meter
       </div>
     </div>
   </div>

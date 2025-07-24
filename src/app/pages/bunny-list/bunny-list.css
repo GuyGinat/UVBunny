@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  background: linear-gradient(0deg, #fff0f6 0%, #ffffff 100%);
+  background: linear-gradient(0deg, #f3e3d9 0%, #ffffff 100%);
 }
 
 .container {
@@ -19,7 +19,7 @@
 .bunny-card:hover, .bunny-card:focus {
   transform: scale(1.05);
   border-width: 2px;
-  border-color: #fd6ba5;
+  border-color: #f26912;
   box-shadow: 0 4px 16px rgba(25,135,84,0.15);
   outline: none;
 }
@@ -38,20 +38,136 @@
 }
 
 .badge {
-  background-color: #fd6ba5;
+  background-color: #f26912;
 }
 
 .config-badge-btn {
   cursor: pointer;
   border-radius: 5px;
   font-size: 1.5rem;
-  background-color: #ff8ab9;
+  background-color: #f26912;
   color: #fff;
-  border: 1px solid #ff8ab9;
+  border: 1px solid #f26912;
   transition: background 0.2s, color 0.2s, border 0.2s;
 }
 .config-badge-btn:hover, .config-badge-btn:focus {
   background: #fff;
-  color: #ff8ab9;
-  border: 1px solid #ff8ab9;
+  color: #f26912;
+  border: 2px solid #f26912;
+}
+
+.bunny-title-img {
+  display: block;
+  margin: 0 auto 8px auto;
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+}
+
+.bunny-subtitle {
+  color: #0c1f33;
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.input-group {
+  background: #f7f7fa;
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: 0 2px 8px rgba(12, 31, 51, 0.04);
+}
+
+.form-control {
+  border-radius: 8px 0 0 8px;
+  border: 1px solid #f26912;
+  background: #f7f7fa;
+  color: #0c1f33;
+}
+
+.btn.btn-primary {
+  background: #f26912;
+  border: 1px solid #f26912;
+  color: #fff;
+  border-radius: 0 8px 8px 0;
+  transition: background 0.2s, color 0.2s;
+}
+.btn.btn-primary:hover, .btn.btn-primary:focus {
+  background: #0c1f33;
+  color: #fff;
+  border: 1.5px solid #0c1f33;
+}
+
+.btn.btn-outline-secondary {
+  border: 1px solid #f26912;
+  color: #f26912;
+  background: #fff7f0;
+  border-radius: 0;
+  transition: background 0.2s, color 0.2s;
+}
+.btn.btn-outline-secondary:hover, .btn.btn-outline-secondary:focus {
+  background: #f26912;
+  color: #fff;
+}
+
+.average-happiness-box {
+  display: inline-block;
+  background: #f26912;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0.25em 1.2em;
+  border-radius: 18px;
+  box-shadow: 0 2px 8px rgba(12, 31, 51, 0.08);
+  letter-spacing: 1px;
+  vertical-align: middle;
+  margin-left: 0.5em;
+}
+
+.bunny-disclaimer-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+}
+.bunny-disclaimer-btn {
+  background: #f26912;
+  color: #fff;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(12, 31, 51, 0.12);
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s, color 0.2s;
+  outline: none;
+}
+.bunny-disclaimer-btn:hover, .bunny-disclaimer-btn:focus {
+  background: #0c1f33;
+  color: #fff;
+}
+.bunny-disclaimer-popup {
+  display: none;
+  position: absolute;
+  bottom: 48px;
+  right: 0;
+  min-width: 260px;
+  background: #fff7f0;
+  color: #0c1f33;
+  border: 1.5px solid #f26912;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(12, 31, 51, 0.10);
+  padding: 16px 18px;
+  font-size: 1rem;
+  line-height: 1.4;
+  z-index: 1001;
+  white-space: normal;
+}
+.bunny-disclaimer-btn:hover .bunny-disclaimer-popup,
+.bunny-disclaimer-btn:focus .bunny-disclaimer-popup {
+  display: block;
 }

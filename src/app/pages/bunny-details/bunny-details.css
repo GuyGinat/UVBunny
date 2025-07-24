@@ -1,8 +1,93 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(0deg, #f3e3d9 0%, #ffffff 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(255, 192, 203, 0.12);
+  padding-bottom: 32px;
+}
+.card {
+  border-radius: 18px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  border: 1px solid #a0a0a0;
+}
 .bunny-avatar {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   background: #eee url('https://placehold.co/100x100?text=Bunny') center/cover no-repeat;
-  border: 3px solid #fff;
+  border: 2.5px solid #f26912;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.bunny-happiness-box {
+  display: inline-block;
+  background: #f26912;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.25em 1.2em;
+  border-radius: 18px;
+  box-shadow: 0 2px 8px rgba(12, 31, 51, 0.08);
+  letter-spacing: 1px;
+  vertical-align: middle;
+  margin-bottom: 1em;
+}
+.btn-primary, .btn-outline-success, .btn-outline-warning, .btn-outline-secondary {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.btn-primary {
+  background: #f26912;
+  border: 1px solid #f26912;
+  color: #fff;
+}
+.btn-primary:hover {
+  background: #0c1f33;
+  color: #fff;
+  border: 1.5px solid #0c1f33;
+}
+.btn-outline-secondary {
+  border: 1px solid #f26912;
+  color: #f26912;
+  background: #fff7f0;
+}
+.btn-outline-secondary:hover {
+  background: #f26912;
+  color: #fff;
+}
+.btn-outline-success {
+  border: 1px solid #0c1f33;
+  color: #0c1f33;
+  background: #fff7f0;
+}
+.btn-outline-success:hover {
+  background: #0c1f33;
+  color: #fff;
+}
+.btn-outline-warning {
+  border: 1px solid #f26912;
+  color: #f26912;
+  background: #fff7f0;
+}
+.btn-outline-warning:hover {
+  background: #f26912;
+  color: #fff;
+}
+.list-group-item {
+  background: #fff7f0;
+  border: 1px solid #f3e3d9;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  color: #0c1f33;
+}
+.list-group {
+  border: none;
+  padding-left: 0;
+}
+.btn.btn-outline-secondary.mb-3 {
+  margin-top: 18px;
 }

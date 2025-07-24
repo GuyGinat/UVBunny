@@ -8,7 +8,7 @@
       <button type="button" class="btn btn-outline-secondary btn-sm mb-3" (click)="avatarInput.click()">Change Avatar</button>
       <input #avatarInput type="file" class="d-none" (change)="onAvatarSelected($event)" accept="image/*" />
       <h3 class="card-title">{{ bunny.name }}</h3>
-      <span class="badge bg-success fs-5 mb-3">Happiness: {{ happiness }}</span>
+      <span class="bunny-happiness-box mb-3">Happiness: {{ happiness }}</span>
       <hr>
       <div class="mb-3">
         <button class="btn btn-outline-success me-2" (click)="eat('lettuce')">Eat Lettuce 🥬</button>
